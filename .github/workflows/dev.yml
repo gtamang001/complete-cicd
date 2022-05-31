@@ -1,7 +1,11 @@
 name: workflow yaml 
 on: 
   push: 
-  
+    branches: 
+      - feature 
+      - develop
+  workflow_dispatch: 
+
 jobs: 
   get-version: 
     runs-on: ubuntu-latest
