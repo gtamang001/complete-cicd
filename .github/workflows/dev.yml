@@ -2,7 +2,10 @@ name: workflow yaml
 on: 
   push: 
     branches: 
-      - feature* 
+      - feature 
+      - develop
+  workflow_dispatch: 
+
 jobs: 
   get-version: 
     runs-on: ubuntu-latest
@@ -24,13 +27,16 @@ jobs:
   deploy-dev: 
     needs: docker-build
     runs-on: ubuntu-latest
+    if: ${{ startsWith(github.ref, 'refs/heads/feature') }}
     environment: dev
     steps: 
     - name: run update dev yaml with kustomize 
       run: echo "run dev yaml update"
+
   deploy-uat: 
     needs: docker-build
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/develop' }}
     environment: uat 
     steps: 
     - name: run uat update yaml 
@@ -38,6 +44,7 @@ jobs:
   create-release: 
     needs: docker-build 
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
     environment: prod
     steps: 
     - name: run the release 
@@ -50,6 +57,7 @@ jobs:
     steps: 
     - name: update prod 
       run: echo "update prod yaml"
+# test comment 
   
 
   
