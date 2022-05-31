@@ -1,0 +1,54 @@
+name: workflow yaml 
+on: 
+  push: 
+    - feature* 
+jobs: 
+  get-version: 
+    runs-on: ubuntu-latest
+    steps: 
+    - name: run get version
+      run: echo "get version from rel tag"
+  maven-build: 
+    needs: get-version
+    runs-on: ubuntu-latest
+    steps: 
+    - name: run maven build 
+      run: echo "maven build and then archive"
+  docker-build: 
+    needs: get-version
+    runs-on: ubuntu-latest
+    steps:
+    - name: run docker build 
+      run: echo "Run docker build and push"
+  deploy-dev: 
+    needs: docker-build
+    runs-on: ubuntu-latest
+    environment: dev
+    steps: 
+    - name: run update dev yaml with kustomize 
+      run: echo "run dev yaml update"
+  deploy-uat: 
+    needs: docker-build
+    runs-on: ubuntu-latest
+    environment: uat 
+    steps: 
+    - name: run uat update yaml 
+      run: echo "update uat yaml kustomize"
+  create-release: 
+    needs: docker-build 
+    runs-on: ubuntu-latest
+    environment: prod
+    steps: 
+    - name: run the release 
+      run: echo "createing release"
+
+  deploy-prod: 
+    needs: create-release
+    runs-on: ubuntu-latest
+    environment: prod 
+    steps: 
+    - name: update prod 
+      run: echo "update prod yaml"
+  
+
+  
