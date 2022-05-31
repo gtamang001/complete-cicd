@@ -24,7 +24,7 @@ jobs:
   deploy-dev: 
     needs: docker-build
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.ref, 'featur') }}
+    if: ${{ startsWith(github.ref, 'refs/heads/feature') }}
     environment: dev
     steps: 
     - name: run update dev yaml with kustomize 
