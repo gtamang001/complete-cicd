@@ -12,6 +12,10 @@ jobs:
     outputs: 
       version: ${{steps.version.outputs.VERSION}}
     steps: 
+    - name: checkout code 
+      uses: actions/checkout@v2
+      with: 
+        fetch-depth: '0'
     - name: run get version
       id: version
       run: |
