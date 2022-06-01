@@ -42,8 +42,10 @@ jobs:
     if: ${{ startsWith(github.ref, 'refs/heads/feature') }}
     environment: dev
     steps: 
-    - name: run update dev yaml with kustomize 
-      run: echo "run dev yaml update"
+    - name: Test in two steps below 
+      run: |
+        echo "maven build and then archive"
+        echo "Is this printing ${{needs.get-version.outputs.version}}"
 
   deploy-uat: 
     needs: docker-build
