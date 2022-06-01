@@ -45,7 +45,7 @@ jobs:
     - name: Test in two steps below 
       run: |
         echo "maven build and then archive"
-        echo "Is this printing ${{needs.get-version.outputs.version}}"
+        echo "Is this printing ${{needs.docker-build.get-version.outputs.version}}"
 
   deploy-uat: 
     needs: docker-build
