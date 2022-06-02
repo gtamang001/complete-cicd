@@ -20,6 +20,7 @@ jobs:
       id: version
       run: |
         version=$(git describe --tags | cut -d '-' -f 1)
+        version1=$(git describe --tags | cut -d '-' -f 2)
         echo "::set-output name=VERSION::$version"
         echo "::set-output name=VERSION1::$version1"
       
