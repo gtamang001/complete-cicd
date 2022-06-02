@@ -21,6 +21,7 @@ jobs:
       run: |
         version=$(git describe --tags | cut -d '-' -f 1)
         echo "::set-output name=VERSION::$version"
+        echo "::set-output name=VERSION1::$version1"
       
   maven-build: 
     needs: get-version
@@ -29,7 +30,8 @@ jobs:
     - name: run maven build 
       run: |
         echo "maven build and then archive"
-        echo "Is this printing ${{needs.get-version.outputs.version}}"
+        echo "Is this printing version ${{needs.get-version.outputs.version}}"
+        echo "Is this printing version1 ${{needs.get-version.outputs.version1}}"
   docker-build: 
     needs: get-version
     runs-on: ubuntu-latest
