@@ -10,8 +10,8 @@ jobs:
   get-version: 
     runs-on: ubuntu-latest
     outputs: 
-      version: ${{steps.version.outputs.VERSION}}
-      version1: ${{steps.version.outputs.VERSION1}}
+      value1: ${{steps.version.outputs.VERSION}}
+      value2: ${{steps.version.outputs.VERSION1}}
     steps: 
     - name: checkout code 
       uses: actions/checkout@v2
