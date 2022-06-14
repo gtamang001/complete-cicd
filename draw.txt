@@ -1,0 +1,4 @@
+maven-build 
+           sonar 
+           sonar-result maven-push 
+           docker-build 

@@ -1,0 +1,38 @@
+on: 
+  # push: 
+  #   branches: 
+  #     - feature 
+  #     - uat 
+  workflow_dispatch: 
+
+jobs: 
+  maven-build: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: maven build 
+        run: echo "maven build"
+  sonar-scan: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: maven build 
+        run: echo "sonar scan"
+  sonar-result: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: maven build 
+        run: echo "maven build"
+  docker-build: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: docker build 
+        run: echo "docker build"
+  deploy-uat: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: deploy uat 
+        run: echo "deploy uat"
+  deploy-prod: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: deploy uat 
+        run: echo "deploy uat"

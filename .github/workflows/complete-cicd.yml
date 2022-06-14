@@ -1,9 +1,9 @@
 name: workflow yaml 
 on: 
-  push: 
-    branches: 
-      - feature 
-      - develop
+  # push: 
+  #   branches: 
+  #     - feature 
+  #     - develop
   workflow_dispatch: 
 
 jobs: 
