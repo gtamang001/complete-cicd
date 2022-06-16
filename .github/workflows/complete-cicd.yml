@@ -1,23 +1,39 @@
 name: workflow yaml 
 on: 
-  push: 
-    branches: 
-      - feature 
-      - develop
+  # push: 
+  #   branches: 
+  #     - feature 
+  #     - develop
   workflow_dispatch: 
 
 jobs: 
   get-version: 
     runs-on: ubuntu-latest
+    outputs: 
+      value1: ${{steps.version.outputs.VERSION}}
+      value2: ${{steps.version.outputs.VERSION1}}
     steps: 
+    - name: checkout code 
+      uses: actions/checkout@v2
+      with: 
+        fetch-depth: '0'
     - name: run get version
-      run: echo "get version from rel tag"
+      id: version
+      run: |
+        version=$(git describe --tags | cut -d '-' -f 1)
+        version1=$(git describe --tags | cut -d '-' -f 2)
+        echo "::set-output name=VERSION::$version"
+        echo "::set-output name=VERSION1::$version1"
+      
   maven-build: 
     needs: get-version
     runs-on: ubuntu-latest
     steps: 
     - name: run maven build 
-      run: echo "maven build and then archive"
+      run: |
+        echo "maven build and then archive"
+        echo "Is this printing version ${{needs.get-version.outputs.value1}}"
+        echo "Is this printing version1 ${{needs.get-version.outputs.value2}}"
   docker-build: 
     needs: get-version
     runs-on: ubuntu-latest
@@ -30,8 +46,10 @@ jobs:
     if: ${{ startsWith(github.ref, 'refs/heads/feature') }}
     environment: dev
     steps: 
-    - name: run update dev yaml with kustomize 
-      run: echo "run dev yaml update"
+    - name: Test in two steps below 
+      run: |
+        echo "maven build and then archive"
+        echo "Is this printing ${{needs.docker-build.get-version.outputs.version}}"
 
   deploy-uat: 
     needs: docker-build

@@ -1,0 +1,28 @@
+name: TEST of checkout action 
+on: 
+  push: 
+    branches: 
+      - feature
+
+jobs: 
+  test-checkout: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout master branch 
+        uses: actions/checkout@v2
+        with: 
+          ref: 'refs/heads/main'
+          fetch-depth: '0'
+      - name: commit to main branch 
+        run: |
+          git status
+          git pull
+          touch test.txt
+          git config --global user.name "Ganga Tamang"
+          git config --global user.password "$PASS"
+          echo "This is test file content" > test.txt
+          git add .
+          git commit -m "This is adding a commit to main branch"
+          git push origin HEAD
+        env: 
+          PASS: ${{secrets.PASSKEY}}

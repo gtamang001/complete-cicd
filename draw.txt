@@ -4,6 +4,6 @@ maven-build
            docker-build 
 
 
-feature branch : 0.0.1-14-gaa462fb "when no commits made"
+feature branch : 0.0.1-14-gaa462fb "when no commits made" we are at 0.0.1-17-gd5d9ab9
 develop: no tags 
-master: 
+main: 0.0.1-2-g19860ad
