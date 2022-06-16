@@ -4,4 +4,4 @@ maven-build
            docker-build 
 
 
-feature branch : 0.0.1-14-gaa462fb
+feature branch : 0.0.1-14-gaa462fb "when no commits made"
