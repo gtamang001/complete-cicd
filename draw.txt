@@ -1,0 +1,9 @@
+maven-build 
+           sonar 
+           sonar-result maven-push 
+           docker-build 
+
+
+feature branch : 0.0.1-14-gaa462fb "when no commits made"
+develop: no tags 
+master: 
