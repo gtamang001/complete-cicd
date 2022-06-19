@@ -1,14 +1,14 @@
 on: 
-  # push: 
-  #   branches: 
-  #     - feature 
-  #     - uat 
+  push: 
+    branches: 
+      - feature 
+      - uat 
   workflow_dispatch: 
 
 jobs: 
   maven-build: 
     runs-on: ubuntu-latest
-    steps: 
+    steps: gaw3
       - name: maven build 
         run: echo "maven build"
   sonar-scan: 
